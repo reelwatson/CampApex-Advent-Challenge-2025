@@ -4,6 +4,16 @@ public with sharing class MostNeededSupply {
         String mostNeededItem;
         Map<String, Integer> supplyMap = new Map<String, Integer>();
 
+        for (String shoppingListItem : shoppingList) {
+            // Here need to check if key (shoppingListItem) already exists
+            // If yes then add to value (value + 1) of existing key
+            // If no then create new key with value of 1
+        }
+
+        // Check map to see which key has highest value (loop?)
+        // Return the key with the highest value
+        // If tie then return the first key (earliest key in shoppingList)
+
         return mostNeededItem;
     }
 }
