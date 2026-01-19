@@ -2,6 +2,7 @@ public with sharing class MostNeededSupply {
     public String findMostNeededSupply(List<String> shoppingList) {
         // Your solution here
         String mostNeededItem;
+        Map<String, Integer> supplyMap = new Map<String, Integer>();
 
         return mostNeededItem;
     }
