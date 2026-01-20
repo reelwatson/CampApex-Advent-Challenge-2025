@@ -24,9 +24,14 @@ public with sharing class MostNeededSupply {
         // get max value of the list
         Integer maxSupplyItem = supplyList[supplyList.size() - 1];
 
-        // Return the key with the highest value
-        // If tie then return the first key (earliest key in shoppingList)
-
+        // Return the keys with the highest value (for loop)
+        for (String key : shoppingList) {
+            if (supplyMap.get(key) == maxSupplyItem) {
+                mostNeededItem = key;
+                // If tie then return the first key (earliest key in shoppingList
+                break;
+            }
+        }
         return mostNeededItem;
     }
 }
