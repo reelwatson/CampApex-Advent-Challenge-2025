@@ -16,8 +16,14 @@ public with sharing class MostNeededSupply {
             }
         }
 
-        // Check map to see which key has highest value (loop?)
-        
+        // Check map to see which key has highest value
+        // List of all values
+        List<Integer> supplyList = supplyMap.values();
+        // .sort() method to order list by ascending
+        supplyList.sort();
+        // get max value of the list
+        Integer maxSupplyItem = supplyList[supplyList.size() - 1];
+
         // Return the key with the highest value
         // If tie then return the first key (earliest key in shoppingList)
 
