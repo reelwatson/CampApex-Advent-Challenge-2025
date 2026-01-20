@@ -6,11 +6,18 @@ public with sharing class MostNeededSupply {
 
         for (String shoppingListItem : shoppingList) {
             // Here need to check if key (shoppingListItem) already exists
-            // If yes then add to value (value + 1) of existing key
+            if (supplyMap.containsKey(shoppingListItem)) {
+                // If yes then add to value (value + 1) of existing key
+                supplyMap.put(shoppingListItem, supplyMap.get(shoppingListItem) + 1);
+            }
             // If no then create new key with value of 1
+            else {
+                supplyMap.put(shoppingListItem, 1);
+            }
         }
 
         // Check map to see which key has highest value (loop?)
+        
         // Return the key with the highest value
         // If tie then return the first key (earliest key in shoppingList)
 
