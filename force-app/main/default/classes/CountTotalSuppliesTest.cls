@@ -23,7 +23,25 @@
 private class CountTotalSuppliesTest {
 
     @isTest
-    static void myUnitTest() {
+    static void positiveCountTotalSupplies() {
         // TO DO: implement unit test
+        Map<String, Integer> positiveMap = new Map<String, Integer> {
+            'Diapers' => 20,
+            'Wipes' => 9,
+            'Swaddles' => 5
+        };
+        Test.startTest();
+        Integer positiveCount = CountTotalSupplies.countTotalSupplies(positiveMap);
+        Test.stopTest();
+        Assert.isTrue(positiveCount == 34, 'We should have found 34 items');
+    }
+
+    @IsTest
+    static void negativeCountTotalSupplies() {
+        Map<String, Integer> negativeMap = new Map<String, Integer>();
+        Test.startTest();
+        Integer zeroCount = CountTotalSupplies.countTotalSupplies(negativeMap);
+        Test.stopTest();
+        Assert.isTrue(zeroCount == 0, 'The number should have been zero.');
     }
 }
