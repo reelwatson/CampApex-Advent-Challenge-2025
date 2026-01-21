@@ -14,7 +14,7 @@ public with sharing class CalculateThreadNeeded {
         for (String name : names) {
             // Add all letters to a List<String> (letters) where each letter is a separate entry
             for (Integer i = 0; i < name.length(); i++) {
-                letters.add(name.substring(i,i+1));
+                letters.add(name.substring(i, i + 1));
             }
         }
         // in new loop, for each letter (String letter : letters)
