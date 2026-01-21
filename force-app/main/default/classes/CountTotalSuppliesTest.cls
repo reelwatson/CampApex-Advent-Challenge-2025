@@ -44,4 +44,17 @@ private class CountTotalSuppliesTest {
         Test.stopTest();
         Assert.isTrue(zeroCount == 0, 'The number should have been zero.');
     }
+
+    @IsTest
+    static void edgeCountTotalSupplies() {
+        Map<String, Integer> zeroMap = new Map<String, Integer>{
+            'Bottle Warmer' => 0,
+            'Wipes Warmer' => 0,
+            'Owl Sock' => 0
+        };
+        Test.startTest();
+        Integer zeroItems = CountTotalSupplies.countTotalSupplies(zeroMap);
+        Test.stopTest();
+        Assert.isTrue(zeroItems == 0, 'We should have seen zero items because we added keys with values that are all zeroes.');
+    }
 }
