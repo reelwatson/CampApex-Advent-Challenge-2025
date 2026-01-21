@@ -4,16 +4,24 @@ public with sharing class CalculateThreadNeeded {
         //if names is empty return 0
 
         Integer neededThread = 0;
+        String[] namesList;
         
-        //for each String names (for String name : names)
+        // for each String names (for String name : names)
+        // break each String into List<String> letters
+        // in nested loop over each letter (for String letter : letters)
+        // find each value per String key (letter) in threadPerLetter
+        // add to total sum of neededThread
 
-        //break each String into List<String> letters using split() method
+        // OR
 
-        //loop over each letter (for String letter : letters)
-
-        //find each value per String key (letter) in threadPerLetter
-
-        //add to total sum of neededThread
+        // for each String names (for String name : names)
+        for (String name : names) {
+            
+        }
+        // Add all letters to a List<String> (letters) where each letter is a separate entry
+        // in new loop, for each letter (String letter : letters)
+        // find each value per String key (letter) in threadPerLetter
+        // add to total sum of neededThread
 
         return neededThread;
     }
