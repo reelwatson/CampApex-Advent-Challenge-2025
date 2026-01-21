@@ -23,7 +23,17 @@
 private class DaysUntilBabyTest {
 
     @isTest
-    static void myUnitTest() {
-        // TO DO: implement unit test
+    static void positiveDaysUntilBaby() {
+        String today = '2026-01-01';
+        String dueDate = '2026-01-11';
+
+        Test.startTest();
+        Integer daysToBaby = DaysUntilBaby.daysUntilBaby(today, dueDate);
+        Test.stopTest();
+
+        Assert.areEqual(10, daysToBaby, 'This should have calculated to ten days.');
+    }
+    static void babyOverdue() {
+
     }
 }
