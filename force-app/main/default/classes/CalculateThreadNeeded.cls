@@ -18,10 +18,10 @@ public with sharing class CalculateThreadNeeded {
             }
         }
         // in new loop, for each letter (String letter : letters)
-        // find each value per String key (letter) in threadPerLetter
-        // add to total sum of neededThread
         for (String letter : letters) {
             if (threadPerLetter.containsKey(letter)) {
+                // find each value per String key (letter) in threadPerLetter
+                // add to total sum of neededThread
                 neededThread += threadPerLetter.get(letter);
             }
         }
