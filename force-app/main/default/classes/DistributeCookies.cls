@@ -3,10 +3,23 @@ public with sharing class DistributeCookies {
         // Your solution here
         Map<String, Object> cookiesMap = new Map<String, Object>();
         
+        //Calculate cookies per person (Integer cookiesPerPerson = totalCookies / helpers.size())
+        Integer cookiesPerPerson = totalCookies / helpers.size();
         
+        //Calculate cookies for parents (Integer leftoverForParents = totalCookies % helpers.size())
+        Integer leftoverForParents = Math.mod(totalCookies,helpers.size());
+        // Turns out you cannot just use % for modulo operations in Apex...
         
-        
-        
+        // Create Map<String,Integer> "distribution" to loop over each helper (String) and their cookie count (Integer)
+        Map<String,Integer> distribution = new Map<String,Integer>();
+        for (String helper : helpers) {
+            distribution.put(helper,cookiesPerPerson);
+        }
+
+        // Create Map<String,Object> and insert cookiesPerPerson, LeftoverForParents, distribution
+        cookiesMap.put('cookiesPerPerson', cookiesPerPerson);
+        cookiesMap.put('leftoverForParents', leftoverForParents);
+        cookiesMap.put('distribution', distribution);
         
         return cookiesMap;
     }
@@ -14,14 +27,6 @@ public with sharing class DistributeCookies {
 
 /*
 
-Given a total number of cookies and a list of helper names, 
-divide the cookies evenly. Any leftover cookies will be saved for Mama and Papa.
-
-
-Your method receives:
-
-totalCookies (Integer): total cookies baked
-helpers (List): names of people receiving cookies
 Return a Map<String, Object> containing:
 
 'cookiesPerPerson' (Integer): how many cookies each helper gets
@@ -38,9 +43,7 @@ Output:
 }
 
 Notes:
-Use integer division: cookiesPerPerson = totalCookies / helpers.size()
-Use modulo for remainder: leftoverForParents = totalCookies % helpers.size()
-All helpers receive equal amounts (no favoritism!)
-totalCookies will be non-negative
-helpers list will have at least one name
+All helpers receive equal amounts
+totalCookies >= 0
+helpers list >= 1
 */
