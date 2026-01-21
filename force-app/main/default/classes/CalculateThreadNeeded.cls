@@ -3,26 +3,28 @@ public with sharing class CalculateThreadNeeded {
         // Your solution here
         //if names is empty return 0
 
-        Integer neededThread = 0;
-        String[] namesList;
-        
-        // for each String names (for String name : names)
-        // break each String into List<String> letters
-        // in nested loop over each letter (for String letter : letters)
-        // find each value per String key (letter) in threadPerLetter
-        // add to total sum of neededThread
-
-        // OR
-
-        // for each String names (for String name : names)
-        for (String name : names) {
-            
+        if (names.isEmpty() || names == null) {
+            return 0;
         }
-        // Add all letters to a List<String> (letters) where each letter is a separate entry
+
+        Integer neededThread = 0;
+        List<String> letters = new List<String>();
+
+        // for each String in names
+        for (String name : names) {
+            // Add all letters to a List<String> (letters) where each letter is a separate entry
+            for (Integer i = 0; i < name.length(); i++) {
+                letters.add(name.substring(i,i+1));
+            }
+        }
         // in new loop, for each letter (String letter : letters)
         // find each value per String key (letter) in threadPerLetter
         // add to total sum of neededThread
-
+        for (String letter : letters) {
+            if (threadPerLetter.containsKey(letter)) {
+                neededThread += threadPerLetter.get(letter);
+            }
+        }
         return neededThread;
     }
 }
