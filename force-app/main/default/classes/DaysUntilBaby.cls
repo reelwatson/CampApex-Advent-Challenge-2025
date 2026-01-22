@@ -11,3 +11,5 @@ public with sharing class DaysUntilBaby {
 }
 
 // Given two dates as strings in the format 'YYYY-MM-DD'
+// Presumption that neither date will be null or blank
+// Presumption that both dates will be in the correct format
