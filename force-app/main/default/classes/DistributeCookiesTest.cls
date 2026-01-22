@@ -2,7 +2,8 @@
 @isTest
 private class DistributeCookiesTest {
 
-    //TO DO: replace "expected, actual, msg) in assert statements for each test
+    //TO DO: add assertions where needed
+    //TO DO: refactor DistributeCookies to respond to remaining test scenarios
 
     @isTest
     static void zeroCookiesTest() {
