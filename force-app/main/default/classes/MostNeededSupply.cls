@@ -8,6 +8,7 @@ public with sharing class MostNeededSupply {
             // Here need to check if key (shoppingListItem) already exists
             if (supplyMap.containsKey(shoppingListItem)) {
                 // If yes then add to value (value + 1) of existing key
+                // We can use .put() and not duplicate because keys are treated as a Set
                 supplyMap.put(shoppingListItem, supplyMap.get(shoppingListItem) + 1);
             }
             // If no then create new key with value of 1
