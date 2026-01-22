@@ -2,6 +2,7 @@ public with sharing class CalculateThreadNeeded {
     public Integer calculateThreadNeeded(List<String> names, Map<String, Integer> threadPerLetter) {
         // Your solution here
         //if names is empty return 0
+        // TO DO: Refactor code to handle if letter does not have match in threadPerLetter map
 
         if (names.isEmpty() || names == null) {
             return 0;
