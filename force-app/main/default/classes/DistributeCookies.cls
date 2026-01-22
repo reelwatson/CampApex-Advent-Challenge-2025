@@ -1,5 +1,5 @@
 public with sharing class DistributeCookies {
-    public Map<String, Object> distributeCookies(Integer totalCookies, List<String> helpers) {
+    public static Map<String, Object> distributeCookies(Integer totalCookies, List<String> helpers) {
         // Your solution here
         Map<String, Object> cookiesMap = new Map<String, Object>();
         
