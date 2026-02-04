@@ -1,19 +1,35 @@
 public with sharing class EvaluatePasswordStrength {
     public String EvaluatePasswordStrength(String password) {
         String strength = 'weak';
+        String numbers = '1234567890';
+        String symbols = '!@#%^&*';        
         Integer points = 0;
 
-        // Points system to calculate total and thus strength of password
-
-        // if statements for each condition? 
         // more efficient way to do this?
 
-        // if password.length() >= 8
-        // if !password.isAllLowerCase() AND !password.isAllUpperCase();
-        // if password.containsAny(String of numbers?)
-        // if password.containsAny(String of symbols)
-        
+        if (password.length() >= 8) {
+            points += 1;
+        }
+        if (!password.isAllLowerCase() && !password.isAllUpperCase()) {
+            points += 1;
+        }
+        if (password.containsAny(numbers)) {
+            points += 1;
+        }
+        if (password.containsAny(symbols)) {
+            points += 1;
+        }
+
         // if/else statements to review points and determine returned String
+        if (points == 4) {
+            strength = 'strong';
+        }
+        else if (points > 1) {
+            strength = 'medium';
+        }
+        else {
+            strength = 'weak';
+        }
 
         return strength;
     }
