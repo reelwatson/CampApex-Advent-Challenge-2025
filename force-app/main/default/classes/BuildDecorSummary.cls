@@ -22,6 +22,7 @@ public with sharing class BuildDecorSummary {
             // Loop through each key of decorMap
             for (String mapString : decorMap.keySet()) {
                 // Add ", " + key + " x" + value to decorString for each key
+                // Option to refactor: use String.join() and a List<String> to create the final string
                 decorString += ', ' + mapString + ' x' + decorMap.get(mapString);
             }
 
