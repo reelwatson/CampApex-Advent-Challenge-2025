@@ -1,20 +1,31 @@
 public with sharing class BuildDecorSummary {
     public String BuildDecorSummary(List<String> decorElements) {
         Map<String, Integer> decorMap = new Map<String, Integer>();
-        String decorString;
-
-        // Check if decorElements empty
-        // If empty, return ""
+        
+        // If decorElements empty, return ""
+        String decorString = '';
 
         // If list is NOT empty, loop through each String of list
-        // Add each String to decorMap
-        // Either add new key and count of 1
-        // OR add count of 1 to existing key
 
-        // Loop through each key of decorMap
-        // Add ", " + key + " x" + value to decorString for each key
-        // Remove first ", " from decorString 
-        // before returning
+            for (String decorElement : decorElements) {
+                // Add each String to decorMap
+                // Either add new key and count of 1
+                // OR add count of 1 to existing key
+                decorMap.put(decorElement, decorMap.get(decorElement)+1);
+            }
+
+
+            // Loop through each key of decorMap
+            for (String mapString : decorMap.keySet()) {
+                // Add ", " + key + " x" + value to decorString for each key
+                decorString += ', ' + mapString + ' x' + decorMap.get(mapString);
+
+                // Remove first ", " from decorString 
+                // before returning
+                // removeStart(substring)
+
+                decorString = decorString.removeStart(', ');
+            }
 
         return decorString;
     }    
