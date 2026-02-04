@@ -12,8 +12,9 @@ public with sharing class BuildDecorSummary {
         // OR add count of 1 to existing key
 
         // Loop through each key of decorMap
-        // Add key + " x" + value + ", " to decorString for each key
-        // For final key do NOT add ", "
+        // Add ", " + key + " x" + value to decorString for each key
+        // Remove first ", " from decorString 
+        // before returning
 
         return decorString;
     }    
