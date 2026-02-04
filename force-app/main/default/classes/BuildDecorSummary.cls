@@ -6,30 +6,32 @@ public with sharing class BuildDecorSummary {
         String decorString = '';
 
         // If list is NOT empty, loop through each String of list
-
+        if (decorElements != null && !decorElements.isEmpty()) {
             for (String decorElement : decorElements) {
                 // Add each String to decorMap
                 // Either add new key and count of 1
                 // OR add count of 1 to existing key
-                decorMap.put(decorElement, decorMap.get(decorElement)+1);
+                 if (decorMap.containsKey(decorElement)) {
+                    decorMap.put(decorElement, decorMap.get(decorElement) + 1);
+                } 
+                else {
+                    decorMap.put(decorElement, 1);
+                }
             }
-
 
             // Loop through each key of decorMap
             for (String mapString : decorMap.keySet()) {
                 // Add ", " + key + " x" + value to decorString for each key
                 decorString += ', ' + mapString + ' x' + decorMap.get(mapString);
-
-                // Remove first ", " from decorString 
-                // before returning
-                // removeStart(substring)
-
-                decorString = decorString.removeStart(', ');
             }
 
+            // Remove first ", " from decorString before returning
+            decorString = decorString.removeStart(', ');
+        }
         return decorString;
     }    
 }
+
 
 /*
 Poppy Wintergold is tracking every festive decoration she adds 
