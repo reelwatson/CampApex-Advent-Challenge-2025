@@ -11,6 +11,7 @@ private class EvaluatePasswordStrengthTest {
         EvaluatePasswordStrength testPassword = new EvaluatePasswordStrength();
         String result = testPassword.EvaluatePasswordStrength(password);
         Test.stopTest();
+        //Assert that condition containsAny(lowercase) && containsAny(uppercase) returns false
         Assert.areEqual(mediumStrength, result, 'The password should have evaluated to medium.');
     }
 
