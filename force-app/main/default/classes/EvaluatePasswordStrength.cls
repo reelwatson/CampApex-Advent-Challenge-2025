@@ -8,16 +8,16 @@ public with sharing class EvaluatePasswordStrength {
         // more efficient way to do this?
 
         if (password.length() >= 8) {
-            points += 1;
+            points++;
         }
         if (!password.isAllLowerCase() && !password.isAllUpperCase()) {
-            points += 1;
+            points++;
         }
         if (password.containsAny(numbers)) {
-            points += 1;
+            points++;
         }
         if (password.containsAny(symbols)) {
-            points += 1;
+            points++;
         }
 
         // if/else statements to review points and determine returned String
@@ -26,9 +26,6 @@ public with sharing class EvaluatePasswordStrength {
         }
         else if (points > 1) {
             strength = 'medium';
-        }
-        else {
-            strength = 'weak';
         }
 
         return strength;
