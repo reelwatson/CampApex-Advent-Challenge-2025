@@ -1,6 +1,8 @@
 @isTest
 private class EvaluatePasswordStrengthTest {
 
+    // TO DO: Add assertions for each rule that is/is not met
+
     @isTest
     static void allCapsWithNumbersOrSymbols() {
         String password = 'ALLCAPS123!';
