@@ -5,11 +5,10 @@ public with sharing class EvaluatePasswordStrength {
         String symbols = '!@#%^&*';        
         Integer points = 0;
 
-        // more efficient way to do this?
-
         if (password.length() >= 8) {
             points++;
         }
+        // TO DO: Need to change this evaluation to account for when all alpha characters are upper/lower AND password includes other characters
         if (!password.isAllLowerCase() && !password.isAllUpperCase()) {
             points++;
         }
@@ -20,7 +19,7 @@ public with sharing class EvaluatePasswordStrength {
             points++;
         }
 
-        // if/else statements to review points and determine returned String
+        
         if (points == 4) {
             strength = 'strong';
         }
