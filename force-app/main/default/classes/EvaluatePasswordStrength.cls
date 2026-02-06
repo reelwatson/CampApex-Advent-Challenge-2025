@@ -4,12 +4,15 @@ public with sharing class EvaluatePasswordStrength {
         String numbers = '1234567890';
         String symbols = '!@#%^&*';        
         Integer points = 0;
+        String uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        String lowercase = 'abcdefghijklmnopqrstuvwxyz';
 
         if (password.length() >= 8) {
             points++;
         }
         // TO DO: Need to change this evaluation to account for when all alpha characters are upper/lower AND password includes other characters
-        if (!password.isAllLowerCase() && !password.isAllUpperCase()) {
+        // Maybe containsAny() with strings for uppercase and lowercase?
+        if (password.containsAny(uppercase) && password.containsAny(lowercase)) {
             points++;
         }
         if (password.containsAny(numbers)) {

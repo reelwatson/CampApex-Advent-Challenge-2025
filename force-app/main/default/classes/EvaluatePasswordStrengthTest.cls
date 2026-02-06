@@ -11,4 +11,39 @@ private class EvaluatePasswordStrengthTest {
         Test.stopTest();
         Assert.areEqual(mediumStrength, result, 'The password should have evaluated to medium.');
     }
+
+    @isTest
+    static void weakPasswordOnlyAlpha() {
+
+    }
+
+    @isTest
+    static void weakPasswordOnlyNumbers() {
+
+    }
+
+    @isTest
+    static void weakPasswordOnlySymbols() {
+
+    }
+
+    @istest
+    static void mediumPasswordTwoRules() {
+
+    }
+
+    @isTest
+    static void mediumPasswordThreeRules() {
+
+    }
+
+    @isTest
+    static void strongPassword() {
+
+    }
+
+    @isTest
+    static void emptyString() {
+
+    }
 }
