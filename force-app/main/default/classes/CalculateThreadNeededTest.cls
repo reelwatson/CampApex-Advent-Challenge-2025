@@ -29,4 +29,14 @@ private class CalculateThreadNeededTest {
         // TO DO: check exception thrown when letter not found in threadPerLetter Map
         // TO DO: If code refactored then check proper path followed
     }
+
+    @IsTest
+    static void negativeOrZeroMapInteger() {
+        // TO DO: Check exception thrown when Integer in the Map is <= 0
+    }
+
+    @IsTest
+    static void someNamesEmpty() {
+        // TO DO: Check exception thrown when one name of the "names" list is blank/null/empty
+    }
 }
