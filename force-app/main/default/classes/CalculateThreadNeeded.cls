@@ -10,14 +10,19 @@ public with sharing class CalculateThreadNeeded {
 
         Integer neededThread = 0;
         List<String> letters = new List<String>();
-
+        try {
         // for each String in names
         for (String name : names) {
 
             // Add all letters to a List<String> (letters) where each letter is a separate entry
             for (Integer i = 0; i < name.length(); i++) {
                 // TO DO: Add IF statement to throw Exception when name is blank/null
-                letters.add(name.substring(i,i+1));
+                if (String.isEmpty(name) || String.isBlank(name)) {
+                    throw new CalculateThreadNeededException('You cannot have blank or null entries in the list of names.');
+                }
+                else {
+                    letters.add(name.substring(i,i+1));
+                }     
             }
         }
         // in new loop, for each letter (String letter : letters)
@@ -27,10 +32,17 @@ public with sharing class CalculateThreadNeeded {
                 // add to total sum of neededThread
                 neededThread += threadPerLetter.get(letter);
             }
+            else {
+                throw new CalculateThreadNeededException('Could not find the letter ' + letter + ' in the provided map of letters and thread length.');
+            }
             // TO DO: Add ELSE to IF statement to throw Exception if letter not found in Map
             // TO DO: Add code to throw Exception IF returned Integer is <= 0
         }
         return neededThread;
+    }
+    catch (CalculateThreadNeededException ctne) {
+        System.debug('Calculate Thread Needed exception caught: ' + ctne.getMessage());
+    }
     }
 }
 
