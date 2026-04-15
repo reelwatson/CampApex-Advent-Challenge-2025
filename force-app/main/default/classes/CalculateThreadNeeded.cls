@@ -43,6 +43,9 @@ public with sharing class CalculateThreadNeeded {
     catch (CalculateThreadNeededException ctne) {
         System.debug('Calculate Thread Needed exception caught: ' + ctne.getMessage());
     }
+    catch (Exception e) {
+        System.debug(e.getMessage());
+    }
     }
 }
 
