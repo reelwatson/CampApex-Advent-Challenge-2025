@@ -4,7 +4,7 @@ public with sharing class CalculateThreadNeeded {
         //if names is empty return 0
         // TO DO: Refactor code to handle if letter does not have match in threadPerLetter map
 
-        if (names.isEmpty() || names == null) {
+        if (names.isEmpty() || names == null || threadPerLetter == null || threadPerLetter.isEmpty()) {
             return 0;
         }
 
@@ -13,8 +13,10 @@ public with sharing class CalculateThreadNeeded {
 
         // for each String in names
         for (String name : names) {
+
             // Add all letters to a List<String> (letters) where each letter is a separate entry
             for (Integer i = 0; i < name.length(); i++) {
+                // TO DO: Add IF statement to throw Exception when name is blank/null
                 letters.add(name.substring(i,i+1));
             }
         }
@@ -25,6 +27,8 @@ public with sharing class CalculateThreadNeeded {
                 // add to total sum of neededThread
                 neededThread += threadPerLetter.get(letter);
             }
+            // TO DO: Add ELSE to IF statement to throw Exception if letter not found in Map
+            // TO DO: Add code to throw Exception IF returned Integer is <= 0
         }
         return neededThread;
     }
