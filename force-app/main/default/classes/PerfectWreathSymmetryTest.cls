@@ -24,19 +24,26 @@ private class PerfectWreathSymmetryTest {
 
     @IsTest
     static void emptyString() {
-        
-        //Assert.isTrue(condition, msg);
+        String testString = '';
+        PerfectWreathSymmetry wreath = new PerfectWreathSymmetry();
+        Boolean symmetryBoolean = wreath.isSymmetric(testString);
+        Assert.isTrue(symmetryBoolean, 'The boolean should have returned as True, instead returned as False.');
     }
 
     @IsTest
     static void singleCharacterString() {
-
-        //Assert.isTrue(condition, msg);
+        String testString = 'Z';
+        PerfectWreathSymmetry wreath = new PerfectWreathSymmetry();
+        Boolean symmetryBoolean = wreath.isSymmetric(testString);
+        Assert.isTrue(symmetryBoolean, 'The boolean should have returned as True, instead returned as False.');
     }
 
     @IsTest
-    static void evenLengthString() {
-
+    static void caseSensitivity() {
+        String testString = 'aBab';
+        PerfectWreathSymmetry wreath = new PerfectWreathSymmetry();
+        Boolean symmetryBoolean = wreath.isSymmetric(testString);
+        Assert.isFalse(symmetryBoolean, 'The boolean should have returned as False, instead returned as True.');
     }
 
     @IsTest
