@@ -6,12 +6,16 @@ public with sharing class BuildDecorSummary {
         String decorString = '';
 
         // If list is NOT empty, loop through each String of list
-        if (decorElements != null && !decorElements.isEmpty()) {
+
+            if (decorElements != null && !decorElements.isEmpty()) {
             for (String decorElement : decorElements) {
                 // Add each String to decorMap
                 // Either add new key and count of 1
                 // OR add count of 1 to existing key
-                if (decorMap.containsKey(decorElement)) {
+                if (String.isBlank(decorElement) || String.isEmpty(decorElement)) {
+                    throw new StringException('Decor elements must all have names!');
+                }
+                else if (decorMap.containsKey(decorElement)) {
                     decorMap.put(decorElement, decorMap.get(decorElement) + 1);
                 } 
                 else {
@@ -30,7 +34,7 @@ public with sharing class BuildDecorSummary {
             decorString = decorString.removeStart(', ');
         }
         return decorString;
-    }    
+    }   
 }
 
 
