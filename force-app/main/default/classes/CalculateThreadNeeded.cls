@@ -35,7 +35,6 @@ public with sharing class CalculateThreadNeeded {
             else {
                 throw new CalculateThreadNeededException('Could not find the letter ' + letter + ' in the provided map of letters and thread length.');
             }
-            // TO DO: Add ELSE to IF statement to throw Exception if letter not found in Map
             // TO DO: Add code to throw Exception IF returned Integer is <= 0
         }
         return neededThread;
@@ -51,20 +50,16 @@ public with sharing class CalculateThreadNeeded {
 
 /*
 Your method receives:
-
 names (List): names to embroider
 threadPerLetter (Map<String, Integer>): map of each letter (uppercase) to inches of thread needed
 Return an Integer representing total inches of thread needed for all names.
-
 
 Example 1:
 
 Input: names = ['MAMA', 'PAPA'], threadPerLetter = {'M' => 5, 'A' => 4, 'P' => 5}
 Output: 36
 
-
 **Explanation**: MAMA = 5+4+5+4 = 18. PAPA = 5+4+5+4 = 18. Total = 36.
-
 
 Notes:
 
