@@ -11,7 +11,7 @@ public with sharing class BuildDecorSummary {
                 // Add each String to decorMap
                 // Either add new key and count of 1
                 // OR add count of 1 to existing key
-                 if (decorMap.containsKey(decorElement)) {
+                if (decorMap.containsKey(decorElement)) {
                     decorMap.put(decorElement, decorMap.get(decorElement) + 1);
                 } 
                 else {

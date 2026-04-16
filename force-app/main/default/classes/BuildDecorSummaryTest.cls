@@ -60,16 +60,27 @@ private class BuildDecorSummaryTest {
     static void emptyDecorationEntries() {
         // TO DO: For real-life example, handle when some entries are blank/null
         // Requires refactoring the code in BuildDecorSummary to check for null entries
-    }
+        List<String> uniqueItems = new List<String>{
+        'Snowflake','','Santa','null'};
+        String uniqueDecorationsString = 'Snowflake x1, Reindeer x1, Santa x1, SNOWFLAKE x1';
+        Test.startTest();
+        BuildDecorSummary uniqueTestBDS = new BuildDecorSummary();
+        String testResults = uniqueTestBDS.BuildDecorSummary(uniqueItems);
+        Test.stopTest();
 
-    @isTest
-    static void caseSensitivity() {
-        // TO DO: For real-life example, handle entries in uppercase, lowercase, mixed
-        // Requires refactoring the code in BuildDecorSummary
+
     }
 
     @isTest
     static void ExceptionHandling() {
         // TO DO: Test for exception handling
+        List<String> uniqueItems = new List<String>{
+        'Snowflake','Reindeer','Santa','SNOWFLAKE'};
+        String uniqueDecorationsString = 'Snowflake x1, Reindeer x1, Santa x1, SNOWFLAKE x1';
+        Test.startTest();
+        BuildDecorSummary uniqueTestBDS = new BuildDecorSummary();
+        String testResults = uniqueTestBDS.BuildDecorSummary(uniqueItems);
+        Test.stopTest();
+
     }
 }
