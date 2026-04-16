@@ -29,40 +29,56 @@ private class CalculateThreadNeededTest {
 
     @IsTest
     static void unexpectedLetter() {
-        // TO DO: check exception thrown when letter not found in threadPerLetter Map
+        // Throws when a letter in names is not in the map
         CalculateThreadNeeded newThreadProject = new CalculateThreadNeeded();
-        List<String> namesList = new List<String>{'MAMA'};
+        List<String> namesList = new List<String>{'MAMA'}; // 'M' missing below
         Map<String, Integer> letterMap = new Map<String, Integer>{'A' => 5, 'B' => 6, 'C' => 7};
-        Test.startTest();
-        Integer totalString = newThreadProject.calculateThreadNeeded(namesList, letterMap);
-        Test.stopTest();
-        // TO DO: Write assertion/update test method to check custom exception thrown
-        // TO DO: Write assertion to check the correct message shows
+
+        Boolean CTNExceptionThrew = false;
+        try {
+            Test.startTest();
+            newThreadProject.calculateThreadNeeded(namesList, letterMap);
+            Test.stopTest();
+        } catch (CalculateThreadNeededException ctne) {
+            CTNExceptionThrew = true;
+            System.assert(CTNExceptionThrew, 'Expected CalculateThreadNeededException to be thrown for unexpected letter.');
+        }
     }
 
     @IsTest
     static void negativeOrZeroMapInteger() {
-        // TO DO: Check exception thrown when Integer in the Map is <= 0
+        // Throws when a corresponding map value is <= 0
         CalculateThreadNeeded newThreadProject = new CalculateThreadNeeded();
         List<String> namesList = new List<String>{'BABA'};
         Map<String, Integer> letterMap = new Map<String, Integer>{'A' => 5, 'B' => -6, 'C' => 7};
-        Test.startTest();
-        Integer totalString = newThreadProject.calculateThreadNeeded(namesList, letterMap);
-        Test.stopTest();
-        // TO DO: Write assertion/update test method to check custom exception thrown
-        // TO DO: Write assertion to check the correct message shows
+
+        Boolean CTNExceptionThrew = false;
+        try {
+            Test.startTest();
+            newThreadProject.calculateThreadNeeded(namesList, letterMap);
+            Test.stopTest();
+        } catch (CalculateThreadNeededException ctne) {
+            CTNExceptionThrew = true;
+            System.assert(CTNExceptionThrew, 'Expected CalculateThreadNeededException to be thrown when thread length zero or negative.');
+        }
     }
 
     @IsTest
     static void someNamesEmpty() {
-        // TO DO: Check exception thrown when one name of the "names" list is blank/null/empty
+        // Verifies custom exception is thrown at the blank/null name guard (line 21)
         CalculateThreadNeeded newThreadProject = new CalculateThreadNeeded();
-        List<String> namesList = new List<String>{'BABA','', 'ABBA', null};
+        // Include a blank and a null to trigger the guard at the first inner-loop iteration
+        List<String> namesList = new List<String>{'BABA', '', 'ABBA', null};
         Map<String, Integer> letterMap = new Map<String, Integer>{'A' => 5, 'B' => 6, 'C' => 7};
-        Test.startTest();
-        Integer totalString = newThreadProject.calculateThreadNeeded(namesList, letterMap);
-        Test.stopTest();
-// TO DO: Write assertion/update test method to check custom exception thrown
-// TO DO: Write assertion to check the correct message shows
+
+        Boolean CTNExceptionThrew = false;
+        try {
+            Test.startTest();
+            newThreadProject.calculateThreadNeeded(namesList, letterMap);
+            Test.stopTest();
+        } catch (CalculateThreadNeededException ctne) {
+            CTNExceptionThrew = true;
+            System.assert(CTNExceptionThrew, 'Expected CalculateThreadNeededException to be thrown when a name is blank or null.');
+        }
     }
 }

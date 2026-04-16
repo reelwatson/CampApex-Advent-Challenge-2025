@@ -38,15 +38,16 @@ public with sharing class CalculateThreadNeeded {
             else {
                 throw new CalculateThreadNeededException('Could not find the letter ' + letter + ' in the provided map of letters and thread length.');
             }
-            // TO DO: Add code to throw Exception IF returned Integer is <= 0
         }
         return neededThread;
     }
     catch (CalculateThreadNeededException ctne) {
         System.debug('Calculate Thread Needed exception caught: ' + ctne.getMessage());
+        return 0;
     }
     catch (Exception e) {
-        System.debug(e.getMessage());
+        System.debug('We hit an unexpected error' + e.getMessage());
+        return 0;
     }
     }
 }
