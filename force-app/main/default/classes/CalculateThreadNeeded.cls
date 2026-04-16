@@ -10,14 +10,19 @@ public with sharing class CalculateThreadNeeded {
 
         Integer neededThread = 0;
         List<String> letters = new List<String>();
-
+        try {
         // for each String in names
         for (String name : names) {
 
             // Add all letters to a List<String> (letters) where each letter is a separate entry
             for (Integer i = 0; i < name.length(); i++) {
                 // TO DO: Add IF statement to throw Exception when name is blank/null
-                letters.add(name.substring(i,i+1));
+                if (String.isEmpty(name) || String.isBlank(name)) {
+                    throw new CalculateThreadNeededException('You cannot have blank or null entries in the list of names.');
+                }
+                else {
+                    letters.add(name.substring(i,i+1));
+                }     
             }
         }
         // in new loop, for each letter (String letter : letters)
@@ -27,29 +32,34 @@ public with sharing class CalculateThreadNeeded {
                 // add to total sum of neededThread
                 neededThread += threadPerLetter.get(letter);
             }
-            // TO DO: Add ELSE to IF statement to throw Exception if letter not found in Map
+            else {
+                throw new CalculateThreadNeededException('Could not find the letter ' + letter + ' in the provided map of letters and thread length.');
+            }
             // TO DO: Add code to throw Exception IF returned Integer is <= 0
         }
         return neededThread;
+    }
+    catch (CalculateThreadNeededException ctne) {
+        System.debug('Calculate Thread Needed exception caught: ' + ctne.getMessage());
+    }
+    catch (Exception e) {
+        System.debug(e.getMessage());
+    }
     }
 }
 
 /*
 Your method receives:
-
 names (List): names to embroider
 threadPerLetter (Map<String, Integer>): map of each letter (uppercase) to inches of thread needed
 Return an Integer representing total inches of thread needed for all names.
-
 
 Example 1:
 
 Input: names = ['MAMA', 'PAPA'], threadPerLetter = {'M' => 5, 'A' => 4, 'P' => 5}
 Output: 36
 
-
 **Explanation**: MAMA = 5+4+5+4 = 18. PAPA = 5+4+5+4 = 18. Total = 36.
-
 
 Notes:
 
