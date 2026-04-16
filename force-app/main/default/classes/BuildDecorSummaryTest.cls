@@ -58,29 +58,21 @@ private class BuildDecorSummaryTest {
 
     @isTest
     static void emptyDecorationEntries() {
-        // TO DO: For real-life example, handle when some entries are blank/null
-        // Requires refactoring the code in BuildDecorSummary to check for null entries
+        // For real-life example, handle when some entries are blank/null
         List<String> uniqueItems = new List<String>{
-        'Snowflake','','Santa','null'};
+        'Snowflake','','Santa', null};
         String uniqueDecorationsString = 'Snowflake x1, Reindeer x1, Santa x1, SNOWFLAKE x1';
-        Test.startTest();
+        Boolean stringExceptionThrew = false;
         BuildDecorSummary uniqueTestBDS = new BuildDecorSummary();
-        String testResults = uniqueTestBDS.BuildDecorSummary(uniqueItems);
-        Test.stopTest();
-
-
-    }
-
-    @isTest
-    static void ExceptionHandling() {
-        // TO DO: Test for exception handling
-        List<String> uniqueItems = new List<String>{
-        'Snowflake','Reindeer','Santa','SNOWFLAKE'};
-        String uniqueDecorationsString = 'Snowflake x1, Reindeer x1, Santa x1, SNOWFLAKE x1';
-        Test.startTest();
-        BuildDecorSummary uniqueTestBDS = new BuildDecorSummary();
-        String testResults = uniqueTestBDS.BuildDecorSummary(uniqueItems);
-        Test.stopTest();
-
+        
+        try {
+            Test.startTest();
+            String testResults = uniqueTestBDS.BuildDecorSummary(uniqueItems);
+            Test.stopTest();
+        }
+        catch (StringException see) {
+            stringExceptionThrew = true;
+            System.assert(stringExceptionThrew, 'Expected a String Exception, instead saw ' + see.getMessage());
+        }
     }
 }
