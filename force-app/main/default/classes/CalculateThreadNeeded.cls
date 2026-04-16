@@ -27,10 +27,13 @@ public with sharing class CalculateThreadNeeded {
         }
         // in new loop, for each letter (String letter : letters)
         for (String letter : letters) {
-            if (threadPerLetter.containsKey(letter)) {
+            if (threadPerLetter.containsKey(letter) && threadPerLetter.get(letter) > 0) {
                 // find each value per String key (letter) in threadPerLetter
                 // add to total sum of neededThread
                 neededThread += threadPerLetter.get(letter);
+            }
+            else if (threadPerLetter.containsKey(letter) && threadPerLetter.get(letter) <= 0) {
+                throw new CalculateThreadNeededException('The corresponding thread length for ' + letter + ' is less than or equal to zero');
             }
             else {
                 throw new CalculateThreadNeededException('Could not find the letter ' + letter + ' in the provided map of letters and thread length.');
