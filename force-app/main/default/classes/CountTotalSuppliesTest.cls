@@ -15,19 +15,17 @@ private class CountTotalSuppliesTest {
         Assert.isTrue(positiveCount == 34, 'We should have found 34 items');
     }
 
-    //TO DO: Add test for IllegalArgumentException that should throw when Map is not passed into method
-
     // TO DO: Refactor to catch custom Exception when Map is empty
-    // @IsTest
-    // static void negativeCountTotalSupplies() {
-    //     Map<String, Integer> nullMap = new Map<String, Integer>();
-    //     Test.startTest();
-    //     Integer zeroCount = CountTotalSupplies.countTotalSupplies(negativeMap);
-    //     Test.stopTest();
-    //     Assert.isTrue(zeroCount == 0, 'The number should have been zero.');
-    // }
+    @IsTest
+    static void nullCountTotalSupplies() {
+        Map<String, Integer> nullMap = new Map<String, Integer>();
+        Test.startTest();
+        Integer zeroCount = CountTotalSupplies.countTotalSupplies(nullMap);
+        Test.stopTest();
+        Assert.isTrue(zeroCount == 0, 'The number should have been zero.');
+    }
 
-    // TO DO: Refactor the class and this unit test to throw Exception (custom?) telling end user that they cannot add items with 0 units
+    // TO DO: Refactor the class and this unit test to throw Exception (custom?) telling end user that they cannot add items with units <= 0
     // @IsTest
     // static void edgeCountTotalSupplies() {
     //     Map<String, Integer> zeroMap = new Map<String, Integer>{
