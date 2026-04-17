@@ -18,8 +18,8 @@ public with sharing class BabyMonitorRangeCalculator {
         Integer y1 = monitorPosition[1];
         for (String room : rooms.keySet()) {
             Integer x2 = rooms.get(room)[0];
-            Integer y2 = room.get(room[1]);
-            
+            Integer y2 = room.get(room)[0];
+
         }
         return inRangeRooms;
         }
