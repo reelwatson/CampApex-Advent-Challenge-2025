@@ -172,9 +172,6 @@ private class BabyMonitorRangeCalculatorTest {
             Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
         }
         Test.stopTest();
-
-        // Throws an exception
-        // Fun exception message: 'Monitor broken, send back to manufacturer'
     }
 
     @IsTest
@@ -202,8 +199,6 @@ private class BabyMonitorRangeCalculatorTest {
 
     @IsTest
     static void roomsMapIsEmptyOrNull() {
-        // Throws an exception
-        // Fun exception message: You testing this monitor in a field or something?
         List<Integer> monitorPosition = new List<Integer>{4, 5};
         Integer range = 8;
         Map<String, List<Integer>> rooms = new Map<String, List<Integer>>();
@@ -223,8 +218,6 @@ private class BabyMonitorRangeCalculatorTest {
 
     @IsTest
     static void roomsMapHasNullValues() {
-        // Throws an exception
-        // Exception message: Did your house beome one-dimensional?  
         List<Integer> monitorPosition = new List<Integer>{4, 5};
         Integer range = 8;
         Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
