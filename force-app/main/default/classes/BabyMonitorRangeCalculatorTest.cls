@@ -95,9 +95,8 @@ private class BabyMonitorRangeCalculatorTest {
         Boolean exceptionThrown = false;
         Test.startTest();
         try {
-            
             List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
-            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
         }
         catch (CustomExceptions.BabyMonitorException bme) {
             exceptionThrown = true;
@@ -107,20 +106,143 @@ private class BabyMonitorRangeCalculatorTest {
     }
 
     @IsTest
-    static void rangeNullOrLessThanOne() {
+    static void monitorPositionListIsNull() {
+        List<Integer> monitorPosition = new List<Integer>();
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void monitorPositionListHasOneCoordinate() {
+        List<Integer> monitorPosition = new List<Integer>{4};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void rangeNull() {
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = null;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();
+
         // Throws an exception
         // Fun exception message: 'Monitor broken, send back to manufacturer'
     }
 
     @IsTest
-    static void roomsMapIsEmpty() {
+    static void rangeLessThanOne() {
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 0;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void roomsMapIsEmptyOrNull() {
         // Throws an exception
         // Fun exception message: You testing this monitor in a field or something?
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>();
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();
     }
 
     @IsTest
     static void roomsMapHasNullValues() {
         // Throws an exception
-        // Exception message: Did your house beome one-dimensional?    
+        // Exception message: Did your house beome one-dimensional?  
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, null},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);            
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
+        Test.stopTest();  
     }
 }

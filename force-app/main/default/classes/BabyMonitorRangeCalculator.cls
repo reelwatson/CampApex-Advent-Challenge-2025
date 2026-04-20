@@ -25,7 +25,7 @@ public with sharing class BabyMonitorRangeCalculator {
         Integer x1 = monitorPosition[0];
         Integer y1 = monitorPosition[1];
         if (x1 == null || y1 == null) {
-            throw new CustomExceptions.BabyMonitorException('Your room is missing one or both coordinates');
+            throw new CustomExceptions.BabyMonitorException('The monitor room is missing one or both coordinates');
         }
         
         
