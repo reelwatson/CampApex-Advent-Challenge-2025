@@ -92,24 +92,22 @@ private class BabyMonitorRangeCalculatorTest {
             'Master Bedroom' => new List<Integer>{3, 7}
         };
         BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
-        List<String> expectedList = new List<String>{'Kitchen', 'Living Room', 'Master Bedroom'};
         Boolean exceptionThrown = false;
-
+        Test.startTest();
         try {
-            Test.startTest();
+            
             List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
-            // TO DO: Update to figure out why Exception was not thrown
-            Test.stopTest();
-            Assert.fail('The method should have thrown an Exception here.');
+            Assert.fail('The method should have thrown an Exception here. Actual list: ' + actualList);
         }
         catch (CustomExceptions.BabyMonitorException bme) {
             exceptionThrown = true;
             Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
         }
+        Test.stopTest();
     }
 
     @IsTest
-    static void rangeIsLessThanOrEqualToZero() {
+    static void rangeNullOrLessThanOne() {
         // Throws an exception
         // Fun exception message: 'Monitor broken, send back to manufacturer'
     }
