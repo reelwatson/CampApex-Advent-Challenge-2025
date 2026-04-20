@@ -12,19 +12,38 @@ public with sharing class BabyMonitorRangeCalculator {
         Sort List<String> of inRangeRooms alphabetically
         Return List<String>
         */
-
         List<String> inRangeRooms = new List<String>();
+        if (range == null || range <= 0) {
+            throw new CustomExceptions.BabyMonitorException('The range of the monitor cannot be less than 1.');
+        }
+        if (monitorPosition == null || monitorPosition.size() < 2) {
+            throw new CustomExceptions.BabyMonitorException('Monitor position must be two coordinates.');
+        }
+        if (rooms == null || rooms.isEmpty()) {
+            throw new CustomExceptions.BabyMonitorException('The list of rooms must be two coordinates.');
+        }
         Integer x1 = monitorPosition[0];
         Integer y1 = monitorPosition[1];
+        if (x1 == null || y1 == null) {
+            throw new CustomExceptions.BabyMonitorException('The monitor room is missing one or both coordinates');
+        }
+        
+        
         for (String room : rooms.keySet()) {
             Integer x2 = rooms.get(room)[0];
-            Integer y2 = room.get(room[1]);
-            
+            Integer y2 = rooms.get(room)[1];
+            if (x2 == null || y2 == null) {
+                throw new CustomExceptions.BabyMonitorException('The room' + room + 'is missing one or both coordinates');
+            }
+            Double distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow(y2 - y1, 2));
+            if (distance <= range) {
+                inRangeRooms.add(room);
+            }                
         }
+        inRangeRooms.sort();
         return inRangeRooms;
-        }
-
     }
+}
 
 // Use the Euclidean distance formula: sqrt((x2-x1)² + (y2-y1)²)
 // A room is within range if distance <= range
