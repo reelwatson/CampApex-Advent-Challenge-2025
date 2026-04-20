@@ -64,12 +64,47 @@ private class BabyMonitorRangeCalculatorTest {
 
     @IsTest
     static void negativeCoordinates() {
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{-3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        List<String> expectedList = new List<String>{'Kitchen', 'Living Room', 'Master Bedroom'};
+
+        Test.startTest();
+        List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+        Test.stopTest();
+
+        Assert.areEqual(expectedList, actualList, 'The method should have returned Kitchen, Living Room, and Master Bedroom in that order. Instead returned ' + actualList);
 
     }
 
     @IsTest
     static void monitorPositionListHasNulls() {
+        List<Integer> monitorPosition = new List<Integer>{4, null};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        List<String> expectedList = new List<String>{'Kitchen', 'Living Room', 'Master Bedroom'};
+        Boolean exceptionThrown = false;
 
+        try {
+            Test.startTest();
+            List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+            Test.stopTest();
+            Assert.fail('The method should have thrown an Exception here.');
+        }
+        catch (CustomExceptions.BabyMonitorException bme) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Expected BabyMonitorException to be thrown when monitorPosition list has null entries.');        
+        }
     }
 
     @IsTest
