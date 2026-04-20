@@ -17,14 +17,18 @@ public with sharing class BabyMonitorRangeCalculator {
         Integer x1 = monitorPosition[0];
         Integer y1 = monitorPosition[1];
         for (String room : rooms.keySet()) {
+            // Can I use safe navigation here? hm
             Integer x2 = rooms.get(room)[0];
-            Integer y2 = room.get(room)[0];
-
+            Integer y2 = rooms.get(room)[1];
+            Double distance = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow(y2 - y1, 2));
+            if (distance <= range) {
+                inRangeRooms.add(room);
+            }
         }
+        inRangeRooms.sort();
         return inRangeRooms;
-        }
-
     }
+}
 
 // Use the Euclidean distance formula: sqrt((x2-x1)² + (y2-y1)²)
 // A room is within range if distance <= range

@@ -4,11 +4,41 @@ private class BabyMonitorRangeCalculatorTest {
 
     @isTest
     static void allRoomsInRange() {
-        // TO DO: implement unit test
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 8;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{6, 8},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        List<String> expectedList = new List<String>{'Kitchen', 'Living Room', 'Master Bedroom'};
+
+        Test.startTest();
+        List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+        Test.stopTest();
+
+        Assert.areEqual(expectedList, actualList, 'The method should have returned Kitchen, Living Room, and Master Bedroom in that order. Instead returned ' + actualList);
+
     }
 
     @IsTest
     static void someRoomsInRange() {
+        List<Integer> monitorPosition = new List<Integer>{4, 5};
+        Integer range = 3;
+        Map<String, List<Integer>> rooms = new Map<String, List<Integer>>{
+            'Living Room' => new List<Integer>{7, 10},
+            'Kitchen' => new List<Integer>{1, 5},
+            'Master Bedroom' => new List<Integer>{3, 7}
+        };
+        BabyMonitorRangeCalculator newMonitor = new BabyMonitorRangeCalculator();
+        List<String> expectedList = new List<String>{'Kitchen', 'Living Room', 'Master Bedroom'};
+
+        Test.startTest();
+        List<String> actualList = newMonitor.calculateMonitorCoverage(monitorPosition, range, rooms);
+        Test.stopTest();
+
+        Assert.areEqual(expectedList, actualList, 'The method should have returned Kitchen, Living Room, and Master Bedroom in that order. Instead returned ' + actualList);
 
     }
 
@@ -19,7 +49,7 @@ private class BabyMonitorRangeCalculatorTest {
 
     @IsTest
     static void negativeCoordinates() {
-        
+
     }
 
     @IsTest
