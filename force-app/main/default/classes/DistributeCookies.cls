@@ -1,6 +1,15 @@
 public with sharing class DistributeCookies {
     public static Map<String, Object> distributeCookies(Integer totalCookies, List<String> helpers) {
         // Your solution here
+
+        if (totalCookies < 0 || totalCookies == null) {
+            // Throw an exception
+        }
+
+        if (helpers == null || helpers.isEmpty()) {
+            // Throw an exception
+        }
+        
         Map<String, Object> cookiesMap = new Map<String, Object>();
         
         //Calculate cookies per person (Integer cookiesPerPerson = totalCookies / helpers.size())
@@ -13,7 +22,12 @@ public with sharing class DistributeCookies {
         // Create Map<String,Integer> "distribution" to loop over each helper (String) and their cookie count (Integer)
         Map<String,Integer> distribution = new Map<String,Integer>();
         for (String helper : helpers) {
-            distribution.put(helper,cookiesPerPerson);
+            if (helper == null || String.isBlank(helper)) {
+                // Throw exception here
+            }
+            else {
+                distribution.put(helper,cookiesPerPerson);
+            }
         }
 
         // Create Map<String,Object> and insert cookiesPerPerson, LeftoverForParents, distribution
