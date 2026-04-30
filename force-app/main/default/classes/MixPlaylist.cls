@@ -8,7 +8,11 @@ public with sharing class MixPlaylist {
             return playList;
         }
 
-        pattern.toLowerCase();
+        pattern = pattern.toLowerCase();
+
+        Integer carolIndex = 0;
+        Integer lullabyIndex = 0;
+        // You use the index rather than Integer i to loop through each list without skipping any entries
 
         for (Integer i = 0; i < playlistLength; i++) {
             if (pattern.charAt(i) != 'c' && pattern.charAt(i) != 'l') {
@@ -20,11 +24,14 @@ public with sharing class MixPlaylist {
             And pattern repeats cyclically until playlistLength is reached
             */
             else if (pattern.charAt(i) == 'c') {
-                // Use module to loop through carols and add to playList
-                // playList.add(carols[Math.mod(i, carols.size())]) ??
+                // Use modulo to loop through carols and add to playList
+                playList.add(carols[Math.mod(carolIndex, carols.size())]);
+                carolIndex++;
             }
             else if (pattern.charAt(i) == 'l') {
-                // Use module to loop through lullabies and add to playList
+                // Use modulo to loop through lullabies and add to playList
+                playList.add(lullabies[Math.mod(lullabyIndex, lullabies.size())]);
+                lullabyIndex++;
             }
         }
 
