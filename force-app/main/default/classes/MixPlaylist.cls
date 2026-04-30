@@ -2,10 +2,9 @@ public with sharing class MixPlaylist {
     public List<String> mixPlaylist(List<String> carols, List<String> lullabies, String pattern, Integer playlistLength) {
         // Your solution here
 
-                List<String> playList = new List<String>();
+        List<String> playList = new List<String>();
 
-
-        if(carols == null || carols.isEmpty() || lullabies == null || lullabies.isEmpty()) {
+        if (carols == null || carols.isEmpty() || lullabies == null || lullabies.isEmpty()) {
             return playList;
         }
 
@@ -15,6 +14,11 @@ public with sharing class MixPlaylist {
             if (pattern.charAt(i) != 'c' && pattern.charAt(i) != 'l') {
                 return new List<String>();
             }
+            /*
+            Tricky part: songs cycle within their list,
+            aka index wraps around when end is reached
+            And pattern repeats cyclically until playlistLength is reached
+            */
             else if (pattern.charAt(i) == 'c') {
 
             }
