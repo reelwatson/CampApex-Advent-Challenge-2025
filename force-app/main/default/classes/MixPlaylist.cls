@@ -20,10 +20,11 @@ public with sharing class MixPlaylist {
             And pattern repeats cyclically until playlistLength is reached
             */
             else if (pattern.charAt(i) == 'c') {
-
+                // Use module to loop through carols and add to playList
+                // playList.add(carols[Math.mod(i, carols.size())]) ??
             }
             else if (pattern.charAt(i) == 'l') {
-
+                // Use module to loop through lullabies and add to playList
             }
         }
 
