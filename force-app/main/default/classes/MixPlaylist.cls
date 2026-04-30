@@ -1,0 +1,28 @@
+public with sharing class MixPlaylist {
+    public List<String> mixPlaylist(List<String> carols, List<String> lullabies, String pattern, Integer playlistLength) {
+        // Your solution here
+
+                List<String> playList = new List<String>();
+
+
+        if(carols == null || carols.isEmpty() || lullabies == null || lullabies.isEmpty()) {
+            return playList;
+        }
+
+        pattern.toLowerCase();
+
+        for (Integer i = 0; i < playlistLength; i++) {
+            if (pattern.charAt(i) != 'c' && pattern.charAt(i) != 'l') {
+                return new List<String>();
+            }
+            else if (pattern.charAt(i) == 'c') {
+
+            }
+            else if (pattern.charAt(i) == 'l') {
+
+            }
+        }
+
+        return playList;
+    }
+}
