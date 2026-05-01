@@ -2,7 +2,7 @@
 private class FamilySupportPlanHandlerTest {
     @isTest
     static void createVillageTaskTest() {
-        //When Family Support Plan is NOT null and Priority is 'High' 
+        // When Family Support Plan is NOT null and Priority is 'High' 
         // and Focus Area is 'Health & Safety'
         // Create at least one Family Support Plan record
         // Test
@@ -10,15 +10,30 @@ private class FamilySupportPlanHandlerTest {
     }
 
     @IsTest
-    static void doNotCreateVillageTaskTest() {
-        //When Family Support Plan is null
-        //When Priority is NOT 'High'
-        //When Focus Area is NOT 'Health & Safety'
-        // Create at least one Family Support Plan record
+    static void createVillageTaskFamilySupportPlanNull() {
+        // When Family Support Plan is null
         // Test
-        // Assert task created for plan
+        // Assert task NOT created for plan
 
     }
+    @IsTest
+    static void createVillageTaskFocusAreaNotHealthAndSafety() {
+        // When Focus Area is NOT 'Health & Safety'
+        // Create at least one Family Support Plan record
+        // Test
+        // Assert task NOT created for plan
+
+    }
+
+    @IsTest
+    static void createVillageTaskPriorityIsNotHigh() {
+        // When Priority is NOT 'High'
+        // Create at least one Family Support Plan record
+        // Test
+        // Assert task NOT created for plan
+
+    }
+
     @IsTest
     static void createVillageTaskDmlExceptionTest() {
         //When DML exception thrown

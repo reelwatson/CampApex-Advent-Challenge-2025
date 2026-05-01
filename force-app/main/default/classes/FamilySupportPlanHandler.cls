@@ -1,5 +1,5 @@
 public class FamilySupportPlanHandler {
-    public static void createVillageTask(List<CAMPX__Family_Support_Plan__c> plans) {
+    public void createVillageTask(List<CAMPX__Family_Support_Plan__c> plans) {
        	//Create an empty list of Village Task records to insert after loop
        	List<CAMPX__Village_Task__c> tasks = new List<CAMPX__Village_Task__c>();
        	//Loop through each Family Support Plan
@@ -31,7 +31,7 @@ public class FamilySupportPlanHandler {
         }
     }
     
-    public static void syncPhaseToTasks(List<CAMPX__Family_Support_Plan__c> newPlansList, Map<Id, CAMPX__Family_Support_Plan__c> oldPlansMap) {
+    public void syncPhaseToTasks(List<CAMPX__Family_Support_Plan__c> newPlansList, Map<Id, CAMPX__Family_Support_Plan__c> oldPlansMap) {
         List<CAMPX__Village_Task__c> updatedTasks = new List<CAMPX__Village_Task__c>();
         Set<Id> changedPlansIds = new Set<Id>();
         for (CAMPX__Family_Support_Plan__c newPlan : newPlansList) {
@@ -59,7 +59,7 @@ public class FamilySupportPlanHandler {
         }
     }
     
-    public static void blockHighPriorityPlanDeletion(Map<Id, CAMPX__Family_Support_Plan__c> plans) {
+    public void blockHighPriorityPlanDeletion(Map<Id, CAMPX__Family_Support_Plan__c> plans) {
         Set<Id> plansCannotDeleteIds = new Set<Id>();
         Set<Id> familySupportPlanIds = plans.keySet();
         
