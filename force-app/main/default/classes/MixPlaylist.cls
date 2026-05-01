@@ -11,6 +11,16 @@ public with sharing class MixPlaylist {
             return playList;
         }
 
+        if (String.isBlank(pattern)) {
+            System.debug('The pattern string has no letters! ' + pattern);
+            return playList;
+        }
+
+        if (playlistLength == null || playlistLength < 1) {
+            System.debug('The playlist length was less than 1 or was null: ' + playlistLength);
+            return playList;
+        }
+
         pattern = pattern.toLowerCase();
         System.debug(pattern);
 
