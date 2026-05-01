@@ -5,19 +5,28 @@ public with sharing class MixPlaylist {
         List<String> playList = new List<String>();
 
         if (carols == null || carols.isEmpty() || lullabies == null || lullabies.isEmpty()) {
+            System.debug('Exited early because one or both lists were null or empty.');
+            System.debug('Carols: ' + carols);
+            System.debug('Lullabies: ' + lullabies);
             return playList;
         }
 
         pattern = pattern.toLowerCase();
+        System.debug(pattern);
 
         Integer carolIndex = 0;
         Integer lullabyIndex = 0;
-        // You use the index rather than Integer i to loop through each list without skipping any entries
 
-        // Each FOR loop needs to use modulo too, beause playlistLength might be bigger than the size of pattern.length()
         for (Integer i = 0; i < playlistLength; i++) {
-            if (String.valueOf(pattern.charAt(Math.mod(i, pattern.length()))) != 'c' 
-                && String.valueOf(pattern.charAt(Math.mod(i, pattern.length()))) != 'l') {
+        String letter = pattern.substring(
+                Math.mod(i, pattern.length()), 
+                Math.mod(i, pattern.length()) + 1
+            );
+
+        System.debug('For index ' + i + ', current letter is ' + letter);
+
+            if (!letter.equals('c') && !letter.equals('l')) {
+                System.debug('Letter did not equal c or l.');
                 return new List<String>();
             }
             /*
@@ -25,12 +34,12 @@ public with sharing class MixPlaylist {
             aka index wraps around when end is reached
             And pattern repeats cyclically until playlistLength is reached
             */
-            else if (String.valueOf(pattern.charAt(Math.mod(i, pattern.length()))) == 'c') {
+            else if (letter.equals('c')) {
                 // Use modulo to loop through carols and add to playList
                 playList.add(carols[Math.mod(carolIndex, carols.size())]);
                 carolIndex++;
             }
-            else if (String.valueOf(pattern.charAt(Math.mod(i, pattern.length()))) == 'l') {
+            else if (letter.equals('l')) {
                 // Use modulo to loop through lullabies and add to playList
                 playList.add(lullabies[Math.mod(lullabyIndex, lullabies.size())]);
                 lullabyIndex++;
@@ -38,5 +47,6 @@ public with sharing class MixPlaylist {
         }
 
         return playList;
+
     }
 }
