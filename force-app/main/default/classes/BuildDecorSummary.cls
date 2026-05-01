@@ -1,4 +1,9 @@
 public with sharing class BuildDecorSummary {
+    /*
+    Future project: web component (LWC) to create a text field where user can add these objects to a list that is then sent into the method
+    Future project: web component to display the list somewhere (home page? record page?)
+    */
+    
     public String BuildDecorSummary(List<String> decorElements) {
         Map<String, Integer> decorMap = new Map<String, Integer>();
         
@@ -12,6 +17,10 @@ public with sharing class BuildDecorSummary {
                 // Add each String to decorMap
                 // Either add new key and count of 1
                 // OR add count of 1 to existing key
+
+
+                // decorElement = decorElement.toLowerCase();
+
                 if (String.isBlank(decorElement) || String.isEmpty(decorElement)) {
                     throw new StringException('Decor elements must all have names!');
                 }
