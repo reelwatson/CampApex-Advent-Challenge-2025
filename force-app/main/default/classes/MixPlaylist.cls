@@ -18,7 +18,8 @@ public with sharing class MixPlaylist {
         Integer lullabyIndex = 0;
 
         for (Integer i = 0; i < playlistLength; i++) {
-        String letter = pattern.substring(
+        // This will return the character in the pattern string
+            String letter = pattern.substring(
                 Math.mod(i, pattern.length()), 
                 Math.mod(i, pattern.length()) + 1
             );
