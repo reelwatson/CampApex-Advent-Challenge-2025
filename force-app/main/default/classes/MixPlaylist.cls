@@ -45,7 +45,7 @@ public with sharing class MixPlaylist {
                 lullabyIndex++;
             }
         }
-
+        System.debug(playList);
         return playList;
 
     }
