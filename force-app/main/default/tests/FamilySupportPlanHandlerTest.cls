@@ -128,29 +128,46 @@ private class FamilySupportPlanHandlerTest {
     @IsTest
     static void createVillageTaskNullPointerExceptionTest() {
         //When any other exception thrown
+        Boolean nullPointerExceptionThrown = false;
         List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
-        insert plans;
+        plans.add(null);
         // Add plan to list, then pass the list into the test method params
 
         // Test
         Test.startTest();
-        FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
-        newPlanHandler.createVillageTask(plans);
+        try {
+            FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+            newPlanHandler.createVillageTask(plans);
+            Assert.fail('This statement should not be reached because an exception should be thrown on a list will any null elements.');
+        }
+        catch (NullPointerException npe) {
+            nullPointerExceptionThrown = true;
+            Assert.isTrue(nullPointerExceptionThrown, 'A null pointer exception should have been thrown because the list contains a null element.');
+        }
         Test.stopTest();
         
-        CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
-                                        CAMPX__Is_Baby_Safety_Critical__c, CAMPX__Task_Type__c,
-                                        CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__c
-                                        FROM CAMPX__Village_Task__c 
-                                        WHERE CAMPX__Family_Support_Plan__c = :plan.Id
-                                        LIMIT 1];
     }
     @IsTest
     static void bulkCreateVillageTaskTest() {
         // Same as first test but with bulk record count (200+)
 
         List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
+
+        for (Integer i = 0; i <= 201; i++) {
+            CAMPX__Family_Support_Plan__c plan = new CAMPX__Family_Support_Plan__c(
+                CAMPX__Priority__c = 'High',
+                CAMPX__Focus_Area__c = 'Health & Safety'
+            );
+            plans.add(plan);
+        }
         insert plans;
+
+        Test.startTest();
+        FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+        newPlanHandler.createVillageTask(plans);
+        Test.stopTest();
+
+        // Query that 202 tasks were created
     }
 
     @IsTest
