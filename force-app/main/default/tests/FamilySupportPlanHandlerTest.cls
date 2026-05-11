@@ -1,21 +1,25 @@
 @IsTest
+// TO DO: Change ALL tests to create empty List<Family Support Plan>, then populate with 1+ Family Support Plans,
+// then pass list into method
 private class FamilySupportPlanHandlerTest {
     @isTest
     static void createVillageTaskTest() {
         // When Family Support Plan is NOT null and Priority is 'High' 
         // and Focus Area is 'Health & Safety'
         // Create at least one Family Support Plan record
+        List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
         CAMPX__Family_Support_Plan__c plan = new CAMPX__Family_Support_Plan__c(
             CAMPX__Priority__c = 'High',
             CAMPX__Focus_Area__c = 'Health & Safety'
         );
-        insert plan;
-        // Add plan to list, then pass the list into the test method params
+        plans.add(plan);
+        insert plans;
+        // Add plans to list, then pass the list into the test method params
 
         // Test
         Test.startTest();
         FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
-        newPlanHandler.createVillageTask(plan);
+        newPlanHandler.createVillageTask(plans);
         Test.stopTest();
         
         CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
@@ -33,18 +37,60 @@ private class FamilySupportPlanHandlerTest {
     }
 
     @IsTest
-    static void createVillageTaskFamilySupportPlanNull() {
+    static void throwExceptionWhenFamilySupportPlanIsNull() {
         // When Family Support Plan is null
         // Test
-        // Assert task NOT created for plan
-
+        Boolean exceptionThrown = false;
+        Test.startTest();
+        try {
+            FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+            newPlanHandler.createVillageTask(null);
+            Assert.fail('This statement should not be reached because the code should throw an exception when using null records as a parameter.');
+        }
+        catch (Exception e) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'Should have thrown an exception trying to run createVillageTask() when Family Support Plan param is null.');
+        }
+        Test.stopTest();
+        
+        CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
+                                        CAMPX__Is_Baby_Safety_Critical__c, CAMPX__Task_Type__c,
+                                        CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__c
+                                        FROM CAMPX__Village_Task__c 
+                                        WHERE CAMPX__Family_Support_Plan__c = :plan.Id
+                                        LIMIT 1];
+        // Assert no Village Task created
+        Assert.isNull(actual, 'No task should have been created since there is no Family Support Plan. Actual: ' + actual);
+        // Assert DML Exception thrown
+        AssertException();
     }
     @IsTest
     static void createVillageTaskFocusAreaNotHealthAndSafety() {
         // When Focus Area is NOT 'Health & Safety'
         // Create at least one Family Support Plan record
+        CAMPX__Family_Support_Plan__c plan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Priority__c = 'High',
+            CAMPX__Focus_Area__c = 'Food & Meals'
+        );
+        List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
+        plans.add(plan);
+        insert plans;
+        // Add plan to list, then pass the list into the test method params
+
         // Test
+        Test.startTest();
+        FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+        newPlanHandler.createVillageTask(plans);
+        Test.stopTest();
+        
+        CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
+                                        CAMPX__Is_Baby_Safety_Critical__c, CAMPX__Task_Type__c,
+                                        CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__c
+                                        FROM CAMPX__Village_Task__c 
+                                        WHERE CAMPX__Family_Support_Plan__c = :plan.Id
+                                        LIMIT 1];
         // Assert task NOT created for plan
+        Assert.isNull(actual, 'The number of tasks should have been null because the Focus Area is not Health & Safety. Instead is ' + actual);
 
     }
 
@@ -52,23 +98,59 @@ private class FamilySupportPlanHandlerTest {
     static void createVillageTaskPriorityIsNotHigh() {
         // When Priority is NOT 'High'
         // Create at least one Family Support Plan record
+        CAMPX__Family_Support_Plan__c plan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Priority__c = 'Low',
+            CAMPX__Focus_Area__c = 'Health & Safety'
+        );
+        List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
+        plans.add(plan);
+        insert plans;
+        // Add plan to list, then pass the list into the test method params
+
+        // Test
+        Test.startTest();
+        FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+        newPlanHandler.createVillageTask(plans);
+        Test.stopTest();
+        
+        CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
+                                        CAMPX__Is_Baby_Safety_Critical__c, CAMPX__Task_Type__c,
+                                        CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__c
+                                        FROM CAMPX__Village_Task__c 
+                                        WHERE CAMPX__Family_Support_Plan__c = :plan.Id
+                                        LIMIT 1];
         // Test
         // Assert task NOT created for plan
+        Assert.isNull(actual, 'The number of tasks should have been null because the Priority is not High. Instead is ' + actual);
 
     }
 
     @IsTest
-    static void createVillageTaskDmlExceptionTest() {
-        //When DML exception thrown
-    }
-
-    @IsTest
-    static void createVillageTaskOtherExceptionTest() {
+    static void createVillageTaskNullPointerExceptionTest() {
         //When any other exception thrown
+        List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
+        insert plans;
+        // Add plan to list, then pass the list into the test method params
+
+        // Test
+        Test.startTest();
+        FamilySupportPlanHandler newPlanHandler = new FamilySupportPlanHandler();
+        newPlanHandler.createVillageTask(plans);
+        Test.stopTest();
+        
+        CAMPX__Village_Task__c actual = [SELECT Id, CAMPX__Assigned_Character__c, CAMPX__Status__c, 
+                                        CAMPX__Is_Baby_Safety_Critical__c, CAMPX__Task_Type__c,
+                                        CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__c
+                                        FROM CAMPX__Village_Task__c 
+                                        WHERE CAMPX__Family_Support_Plan__c = :plan.Id
+                                        LIMIT 1];
     }
     @IsTest
     static void bulkCreateVillageTaskTest() {
         // Same as first test but with bulk record count (200+)
+
+        List<CAMPX__Family_Support_Plan__c> plans = new List<CAMPX__Family_Support_Plan__c>();
+        insert plans;
     }
 
     @IsTest
