@@ -168,6 +168,10 @@ private class FamilySupportPlanHandlerTest {
         Test.stopTest();
 
         // Query that 202 tasks were created
+        Integer numberOfTasksCreated = [SELECT COUNT(Id)
+                                        FROM CAMPX__Village_Task__c
+                                        WHERE CAMPX__Family_Support_Plan__c IN :plans];
+        Assert.areEqual(202, numberOfTasksCreated, 'The method should have created 202 tasks, instead created ' + numberOfTasksCreated);
     }
 
     @IsTest
