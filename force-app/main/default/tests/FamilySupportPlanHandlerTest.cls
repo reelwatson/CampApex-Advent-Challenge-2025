@@ -146,11 +146,28 @@ private class FamilySupportPlanHandlerTest {
 
     @IsTest
     static void syncPhaseToTasksTest() {
+        // Create plan and linked task
+        List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
 
+        CAMPX__Family_Support_Plan__c newFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+            // set Phase field to something
+        );
+        
+        // oldPlan is not null, oldPlan Phase does not equal newPlan Phase (same Id)
+        // Should update Phase on linked task
     }
 
     @IsTest
     static void doNotSyncPhaseToTasksTest() {
+        // Create plan and linked task
+        // oldPlan is not null, oldPlan Phase equals newPlan Phase (same Id)
+        // No changes to linked task
+    }
+
+    @IsTest
+    static void emptyPlanListOrMap() {
+        // pass an empty list or map into the method
 
     }
 
@@ -160,8 +177,13 @@ private class FamilySupportPlanHandlerTest {
     }
 
     @IsTest
+    static void syncPhaseToTasksBulkTest() {
+        // Check that method avoids governor limits
+    }
+
+    @IsTest
     static void syncPhaseToTaskOtherExceptionTest() {
-        //When any other exception thrown
+        //When any other exception thrown like ???
     }
 
     @IsTest

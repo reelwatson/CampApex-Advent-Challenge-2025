@@ -41,7 +41,9 @@ public class FamilySupportPlanHandler {
             }
         }
         
-        updatedTasks = [SELECT Id, CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__r.CAMPX__Phase__c FROM CAMPX__Village_Task__c WHERE CAMPX__Family_Support_Plan__c IN :changedPlansIds];
+        updatedTasks = [SELECT Id, CAMPX__Support_Phase__c, CAMPX__Family_Support_Plan__r.CAMPX__Phase__c 
+                        FROM CAMPX__Village_Task__c 
+                        WHERE CAMPX__Family_Support_Plan__c IN :changedPlansIds];
         for (CAMPX__Village_Task__c task : updatedTasks) {
             task.CAMPX__Support_Phase__c = task.CAMPX__Family_Support_Plan__r.CAMPX__Phase__c;
         }
