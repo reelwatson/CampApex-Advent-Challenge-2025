@@ -168,10 +168,16 @@ private class FamilySupportPlanHandlerTest {
         Check the order of this action - add to list THEN insert, reverse approach, or another method??
         */
         newPlansList.add(originalFamilySupportPlan);
-        update originalFamilySupportPlan;
+
+        Test.startTest();
+        FamilySupportPlanHandler fspHandler = new FamilySupportPlanHandler();
+        fspHandler.syncPhaseToTasks(newPlansList, oldPlansMap);
+        Test.stopTest();
+
+        // Assert that Support Phase field on task is changed from previous value
+        // Assert Support Phase field matches Phase field on linked FSP record
         
-        // oldPlan is not null, oldPlan Phase does not equal newPlan Phase (same Id)
-        // Should update Phase on linked task
+        
     }
 
     @IsTest
