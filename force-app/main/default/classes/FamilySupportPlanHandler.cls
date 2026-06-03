@@ -53,11 +53,11 @@ public class FamilySupportPlanHandler {
         }
         //Catch DML Exception
         catch (DmlException dmle) {
-            System.debug('The following DML exception has occurred: ' + dmle.getMessage());
+            System.debug('A DML exception has occurred: ' + dmle.getStackTraceString());
         }
         //Catch any other thrown exceptions
         catch (Exception e) {
-            System.debug('The following exception has occurred: ' + e.getMessage());
+            System.debug('An unhandled exception has occurred: ' + e.getMessage());
         }
     }
     

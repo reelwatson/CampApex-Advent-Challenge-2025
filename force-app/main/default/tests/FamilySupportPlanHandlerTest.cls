@@ -150,9 +150,19 @@ private class FamilySupportPlanHandlerTest {
         List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
         Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
 
-        CAMPX__Family_Support_Plan__c newFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
-            // set Phase field to something
+        CAMPX__Family_Support_Plan__c originalFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Phase__c = 'Before Baby Arrives'
         );
+        insert originalFamilySupportPlan;
+        oldPlansMap.put(originalFamilySupportPlan.Id, originalFamilySupportPlan);
+
+        CAMPX__Village_Task__c originalTask = new CAMPX__Village_Task__c(
+            CAMPX__Family_Support_Plan__c = originalFamilySupportPlan.Id,
+            CAMPX__Support_Phase__c = originalFamilySupportPlan.CAMPX__Phase__c
+        );
+        insert originalTask;
+
+
         
         // oldPlan is not null, oldPlan Phase does not equal newPlan Phase (same Id)
         // Should update Phase on linked task
