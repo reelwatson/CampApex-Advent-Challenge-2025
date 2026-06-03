@@ -162,7 +162,13 @@ private class FamilySupportPlanHandlerTest {
         );
         insert originalTask;
 
-
+        // Now modify the phase on originalFamilySupportPlan and add to newPlansList
+        originalFamilySupportPlan.CAMPX__Phase__c = 'After Baby Arrives';
+        /*
+        Check the order of this action - add to list THEN insert, reverse approach, or another method??
+        */
+        newPlansList.add(originalFamilySupportPlan);
+        update originalFamilySupportPlan;
         
         // oldPlan is not null, oldPlan Phase does not equal newPlan Phase (same Id)
         // Should update Phase on linked task
