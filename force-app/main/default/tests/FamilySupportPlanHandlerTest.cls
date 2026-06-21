@@ -163,7 +163,8 @@ private class FamilySupportPlanHandlerTest {
         insert originalTask;
 
         // Now modify the phase on originalFamilySupportPlan and add to newPlansList
-        originalFamilySupportPlan.CAMPX__Phase__c = 'After Baby Arrives';
+        String expected = 'After Baby Arrives';
+        originalFamilySupportPlan.CAMPX__Phase__c = expected;
         /*
         Check the order of this action - add to list THEN insert, reverse approach, or another method??
         */
@@ -175,7 +176,15 @@ private class FamilySupportPlanHandlerTest {
         Test.stopTest();
 
         // Assert that Support Phase field on task is changed from previous value
+        CAMPX__Village_Task__c updatedTask = [
+            SELECT Id, CAMPX__Support_Phase__c
+            FROM CAMPX__Village_Task__c
+            WHERE Id = :originalTask.Id
+        ];
+        String actual = updatedTask.CAMPX__Phase__c;
+
         // Assert Support Phase field matches Phase field on linked FSP record
+        Assert.areEqual(expected, actual, 'The Phase should match on the Family Support Plan and the Village Task');
         
         
     }
