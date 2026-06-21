@@ -181,11 +181,10 @@ private class FamilySupportPlanHandlerTest {
             FROM CAMPX__Village_Task__c
             WHERE Id = :originalTask.Id
         ];
-        String actual = updatedTask.CAMPX__Phase__c;
+        String actual = updatedTask.CAMPX__Support_Phase__c;
 
         // Assert Support Phase field matches Phase field on linked FSP record
         Assert.areEqual(expected, actual, 'The Phase should match on the Family Support Plan and the Village Task');
-        
         
     }
 
