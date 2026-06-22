@@ -264,24 +264,48 @@ private class FamilySupportPlanHandlerTest {
         }
         catch (IllegalArgumentException illArgExc) {
             exceptionThrown = true;
-            Assert.isTrue(exceptionThrown, 'The method should have thrown an error because one of the parameters is null.');
+            Assert.isTrue(exceptionThrown, 'The method should have thrown an error because the List is null.');
         }
+
         Test.stopTest();
     }
 
     @IsTest
     static void emptyPlanMap() {
+        List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
+        boolean exceptionThrown = false;
 
-    }
+        CAMPX__Family_Support_Plan__c newFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Phase__c = 'Before Baby Arrives'
+        );
 
-    @IsTest
-    static void syncPhaseToTaskDmlExceptionTest() {
-        //When DML exception thrown
+        insert newFamilySupportPlan;
+        newPlansList.add(newFamilySupportPlan.Id, newFamilySupportPlan);
+
+        Test.startTest();
+
+        try {
+            FamilySupportPlanHandler fspHandler = new FamilySupportPlanHandler();
+            fspHandler.syncPhaseToTasks(newPlansList, oldPlansMap);
+            Assert.fail('The method should have thrown an exception here because one of the arguments is null');
+        }
+        catch (IllegalArgumentException illArgExc) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'The method should have thrown an error because the Map is null.');
+        }
+
+        Test.stopTest();
     }
 
     @IsTest
     static void syncPhaseToTasksBulkTest() {
         // Check that method avoids governor limits
+    }
+
+    @IsTest
+    static void syncPhaseToTaskDmlExceptionTest() {
+        //When DML exception thrown
     }
 
     @IsTest
