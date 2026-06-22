@@ -185,7 +185,6 @@ private class FamilySupportPlanHandlerTest {
 
         // Assert Support Phase field matches Phase field on linked FSP record
         Assert.areEqual(expected, actual, 'The Phase should match on the Family Support Plan and the Village Task');
-        
     }
 
     @IsTest
@@ -193,6 +192,52 @@ private class FamilySupportPlanHandlerTest {
         // Create plan and linked task
         // oldPlan is not null, oldPlan Phase equals newPlan Phase (same Id)
         // No changes to linked task
+
+        List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
+
+        CAMPX__Family_Support_Plan__c originalFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Phase__c = 'Before Baby Arrives'
+        );
+
+        insert originalFamilySupportPlan;
+        oldPlansMap.put(originalFamilySupportPlan.Id, originalFamilySupportPlan);
+
+        CAMPX__Village_Task__c originalTask = new CAMPX__Village_Task__c(
+            CAMPX__Family_Support_Plan__c = originalFamilySupportPlan.Id,
+            CAMPX__Support_Phase__c = originalFamilySupportPlan.CAMPX__Phase__c
+        );
+
+        insert originalTask;
+
+        // Now modify the phase but do NOT change the Phase on originalFamilySupportPlan and add to newPlansList
+        String notexpected = 'After Baby Arrives';
+        String expected = 'Before Baby Arrives';
+
+        originalFamilySupportPlan.CAMPX__Focus_Area__c = 'Gifts & Memories';
+        /*
+        Check the order of this action - add to list THEN insert, reverse approach, or another method??
+        */
+        newPlansList.add(originalFamilySupportPlan);
+
+        Test.startTest();
+        FamilySupportPlanHandler fspHandler = new FamilySupportPlanHandler();
+        fspHandler.syncPhaseToTasks(newPlansList, oldPlansMap);
+        Test.stopTest();
+
+        // Assert that Support Phase field on task is changed from previous value
+        CAMPX__Village_Task__c updatedTask = [
+            SELECT Id, CAMPX__Support_Phase__c
+            FROM CAMPX__Village_Task__c
+            WHERE Id = :originalTask.Id
+        ];
+        String actual = updatedTask.CAMPX__Support_Phase__c;
+
+        // Assert Support Phase field matches Phase field on linked FSP record
+        Assert.areEqual(expected, actual, 'The Phase should match on the Family Support Plan and the Village Task');
+        Assert.areEqual('Before Baby Arrives', actual, 'The Phase on the Village Task should be Before Baby Arrives, matching the Phase on the FSP');
+        Assert.areNotEqual(notExpected, actual, 'The Task should not have been updated to After Baby Arrives');
+
     }
 
     @IsTest
