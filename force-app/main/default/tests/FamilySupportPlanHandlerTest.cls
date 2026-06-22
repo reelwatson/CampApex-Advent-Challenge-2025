@@ -241,6 +241,11 @@ private class FamilySupportPlanHandlerTest {
     }
 
     @IsTest
+    static void syncPhaseToTasksBulkTest() {
+        // Check that method avoids governor limits (create excess # of FSPs and VTs)
+    }
+
+    @IsTest
     static void emptyPlanList() {
         // pass an empty list or map into the method
 
@@ -296,11 +301,6 @@ private class FamilySupportPlanHandlerTest {
         }
 
         Test.stopTest();
-    }
-
-    @IsTest
-    static void syncPhaseToTasksBulkTest() {
-        // Check that method avoids governor limits
     }
 
     @IsTest
