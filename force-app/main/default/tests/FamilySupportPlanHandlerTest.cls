@@ -241,8 +241,36 @@ private class FamilySupportPlanHandlerTest {
     }
 
     @IsTest
-    static void emptyPlanListOrMap() {
+    static void emptyPlanList() {
         // pass an empty list or map into the method
+
+        List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
+        boolean exceptionThrown = false;
+
+        CAMPX__Family_Support_Plan__c originalFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+            CAMPX__Phase__c = 'Before Baby Arrives'
+        );
+
+        insert originalFamilySupportPlan;
+        oldPlansMap.put(originalFamilySupportPlan.Id, originalFamilySupportPlan);
+
+        Test.startTest();
+
+        try {
+            FamilySupportPlanHandler fspHandler = new FamilySupportPlanHandler();
+            fspHandler.syncPhaseToTasks(newPlansList, oldPlansMap);
+            Assert.fail('The method should have thrown an exception here because one of the arguments is null');
+        }
+        catch (IllegalArgumentException illArgExc) {
+            exceptionThrown = true;
+            Assert.isTrue(exceptionThrown, 'The method should have thrown an error because one of the parameters is null.');
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void emptyPlanMap() {
 
     }
 
