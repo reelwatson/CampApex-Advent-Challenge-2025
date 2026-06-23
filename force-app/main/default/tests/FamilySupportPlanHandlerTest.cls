@@ -243,6 +243,58 @@ private class FamilySupportPlanHandlerTest {
     @IsTest
     static void syncPhaseToTasksBulkTest() {
         // Check that method avoids governor limits (create excess # of FSPs and VTs)
+        // Create plans and linked tasks
+        List<CAMPX__Family_Support_Plan__c> newPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        List<CAMPX__Family_Support_Plan__c> oldPlansList = new List<CAMPX__Family_Support_Plan__c>();
+        Map<Id,CAMPX__Family_Support_Plan__c> oldPlansMap = new Map<Id,CAMPX__Family_Support_Plan__c>();
+        List<CAMPX__Village_Task__c> oldTasksList = new List<CAMPX__Village_Task__c>();
+
+        for (Integer i = 0; i < 250; i++) {
+            CAMPX__Family_Support_Plan__c originalFamilySupportPlan = new CAMPX__Family_Support_Plan__c(
+                CAMPX__Phase__c = 'Before Baby Arrives'
+            );
+            oldPlansList.add(originalFamilySupportPlan);
+            oldPlansMap.put(originalFamilySupportPlan.Id, originalFamilySupportPlan);
+        }
+
+        insert oldPlansList;
+
+        for (CAMPX__Family_Support_Plan__c oldPlan : oldPlansList) {
+            CAMPX__Village_Task__c originalTask = new CAMPX__Village_Task__c(
+                CAMPX__Family_Support_Plan__c = oldPlan.Id,
+                CAMPX__Support_Phase__c = oldPlan.CAMPX__Phase__c
+                );
+            oldTasksList.add(originalTask);
+        }
+        insert oldTasksList;
+
+        // Now modify the phase on each FSP record and add to newPlansList
+        String expected = 'After Baby Arrives';
+        for (CAMPX__Family_Support_Plan__c newPlan : oldPlansList) {
+            newPlan.CAMPX__Phase__c = expected;
+            newPlansList.add(newPlan);
+        }
+
+        Test.startTest();
+        FamilySupportPlanHandler fspHandler = new FamilySupportPlanHandler();
+        fspHandler.syncPhaseToTasks(newPlansList, oldPlansMap);
+        Test.stopTest();
+
+        // Query records to confirm 200 FSP records exist with updated Phase
+        // Query records to confirm 200 TV records exist with updated Phase
+        Integer actualNumberOfUpdatedFSP = [
+            SELECT COUNT(Id)
+            FROM CAMPX__Family_Support_Plan__c
+            WHERE CAMPX__Phase__c = :expected]; 
+        Integer actualNumberOfUpdatedVT = [
+            SELECT COUNT(Id)
+            FROM CAMPX__Village_Task__c
+            WHERE CAMPX__Support_Phase__c = :expected
+        ];
+
+        Assert.areEqual(200, actualNumberOfUpdatedFSP, 'Should have found 200 matching Family Support Plans, instead found ' + actualNumberOfUpdatedFSP);
+        Assert.areEqual(200, actualNumberOfUpdatedVT, 'Should have found 200 matching Village Tasks, instead found ' + actualNumberOfUpdatedVT);
+        
     }
 
     @IsTest
