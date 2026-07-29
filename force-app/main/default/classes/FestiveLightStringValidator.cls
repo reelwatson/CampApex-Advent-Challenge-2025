@@ -7,7 +7,7 @@ public class FestiveLightStringValidator {
             return validatorMap;
         }
 
-        String currentLetter = lights.substring(0,2);
+        String currentLetter = lights.substring(0,1);
         String nextLetter = lights.substring(1,2);
 
         while(nextLetter != null) {
