@@ -15,44 +15,58 @@ class Solution {
         List<String> stringList = lights.split('');
         System.debug(stringList);
         
-        // Use a fibonacci-type approach
-        String previousColor;
-        String currentColor = stringList[0];
-        String nextColor = stringList[1];
-        Integer index = 0;
-
-        if (currentColor.equals(nextColor)) {
-            //replace failurePoint 0 with -1
+        if (stringList.size() == 1) {
             return validatorMap;
         }
         
-
-        /*
-        Turn the String param into an array
-        IF String = 2 characters AND characters do NOT match 
-        THEN return true and -1
-        ELSE return false and 1
-
-        IF String = 4 characters
-            oldOddCharacter = String[0]
-            oldEvenCharacter = String [1]
-            newOddCharacter = String[2]
-            newEvenCharacter = String[3]
-            IF odd characters match and even characters match AND odd and even characters DO NOT match
-            THEN return true and -1
-            ELSE 
-
-        THEN loop through using traditional for loop (to track index); Start loop at String[2]
-            IF index % 2 == 0
-            THEN assign newOddCharacter to String[index]
-            ELSE assign newEvenCharacter to String[index]
-            IF
-
-        IF String > 4 characters
+        // Use a fibonacci-type approach
+        String previousColor;
+        String currentColor = stringList[0];
+        System.debug('First color is ' + currentColor);
+        String nextColor = stringList[1];
+        System.debug('Second color is ' + nextColor);
+        Integer index = 0;
 
 
-        If the "old" character matches the "new" character
-        */
+        // Put the below inside a loop (which loop?)
+        if (currentColor.equals(nextColor)) {
+            //replace failurePoint 0 with 1
+            validatorMap.put('failurePoint', 1);
+            return validatorMap;
+        }
+
+        previousColor = currentColor;
+        currentColor = nextColor;
+        index++;
+        System.debug('previousColor is now ' + previousColor);
+        System.debug('currentColor is now ' + currentColor);
+        System.debug('index is now ' + index);
+
+        if (stringList.size() > 2) {
+            nextColor = stringList[index + 1];
+            System.debug('nextColor is now ' + nextColor + ' at index ' + (index + 1));
+            
+            // TO DO: Have the loop stop when nextColor is blank; maybe a WHILE loop?
+            for (Integer i = index; i < stringList.size(); i++) {
+                // Check that previousColor equals nextColor and currentColor does not equal nextColor
+                // If yes then previousColor becomes currentColor, currentColor becomes nextColor, index++, and nextColor is stringList[index]
+                
+                if (currentColor.equals(nextColor) || !previousColor.equals(nextColor)) {
+                    //replace failurePoint 0 with current index
+                    validatorMap.put('failurePoint', index);
+                    return validatorMap;
+                }
+
+                else {
+                    previousColor = currentColor;
+                    currentColor = nextColor;
+                    index++;
+                    nextColor = stringList[index];
+                }
+
+            }
+
+        }
 
         return validatorMap;
     }
