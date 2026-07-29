@@ -2,13 +2,30 @@
 class Solution {
     public Map<String, Object> validateLightString(String lights) {
         // Your solution here
+        
         Map<String, Object> validatorMap = new Map<String, Object>();
+        validatorMap.put('isValid', 'false');
+        validatorMap.put('failurePoint', 0);
+        
+        if (String.isBlank(lights) || String.isEmpty(lights)) {
+            return validatorMap;
+        }
 
-        String oldOddCharacter;
-        String newOddCharacter;
-        String oldEvenCharacter;
-        String newEvenCharacter;
-        List<String> lightsString = new List<String>(); // update to create List from param
+        // Turn the String param into a List<String>
+        List<String> stringList = lights.split('');
+        System.debug(stringList);
+        
+        // Use a fibonacci-type approach
+        String previousColor;
+        String currentColor = stringList[0];
+        String nextColor = stringList[1];
+        Integer index = 0;
+
+        if (currentColor.equals(nextColor)) {
+            //replace failurePoint 0 with -1
+            return validatorMap;
+        }
+        
 
         /*
         Turn the String param into an array
@@ -16,7 +33,7 @@ class Solution {
         THEN return true and -1
         ELSE return false and 1
 
-        IF String = 2 characters
+        IF String = 4 characters
             oldOddCharacter = String[0]
             oldEvenCharacter = String [1]
             newOddCharacter = String[2]
